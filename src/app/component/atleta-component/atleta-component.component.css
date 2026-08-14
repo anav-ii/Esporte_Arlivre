@@ -1,72 +1,117 @@
+/* CONTAINER PRINCIPAL */
+#form {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 35px 45px;
+    background-color: #F8F7F4;
+    border: 1px solid #C85C7A;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
 
-#form{
-    width: 1000px;
-    min-height: 600px;
-    margin: 20px auto;
-    padding: 25px;
+/* TÍTULO */
+#form h2 {
+    text-align: center;
     color: #172033;
+    font-size: 28px;
+    margin: 0 0 30px 0;
 }
 
-h2{
-    margin: 30px 0px;
-    text-transform: uppercase;
-}
-
-#form-atleta{
-    width: 100%;
-    min-height: 600px;
-    font-size: 20px;
-}
-
-label{
-    display: block;
-    padding: 20px 0px;
-}
-
-input{
-    height: 30px;
-    padding: 20px;
-}
-
-.input01{
-    width: 900px;
-}
-
-.input02{
-    width: 400px;
-}
-
-input[type=radio]{
-    width: 35px;
-    height: 35px;
-    margin: 0px 15px;
-}
-
-#div-btns{
-    width: 100%;
-    height: 150px;
-    margin: 25px 0px;
+/* FORMULÁRIO */
+#form-atleta {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+}
+
+/* LABEL DOS CAMPOS */
+#form-atleta > label {
+    color: #172033;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
+/* INPUTS */
+#form-atleta input[type="text"] {
+    width: 100%;
+    height: 42px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+
+    border: 1px solid #172033;
+    border-radius: 5px;
+
+    font-size: 15px;
+    color: #172033;
+    background-color: white;
+}
+
+/* INPUT QUANDO CLICADO */
+#form-atleta input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #C85C7A;
+}
+
+/* ÁREA DO SEXO */
+#form-atleta input[type="radio"] {
+    accent-color: #C85C7A;
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+/* LABEL DOS RADIOS */
+#form-atleta input[type="radio"] + label {
+    display: inline;
+    margin: 0 20px 0 0;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+/* BOTÕES */
+#div-btns {
+    display: flex;
     justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
 }
 
-button{
-    width: 200px;
-    height: 40px;
-    cursor: pointer;
-    border: none;
+/* BOTÃO CADASTRAR */
+#btnAdd {
+    padding: 12px 30px;
+    background-color: #C85C7A;
     color: #F8F7F4;
-    font-size: 20px;
-    letter-spacing: 5px;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-#btnAdd{
+/* BOTÃO LIMPAR */
+#btnLimpar {
+    padding: 12px 30px;
     background-color: #172033;
-    margin-right: 20px;
+    color: #F8F7F4;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-#btnLimpar{
-    background-color: #172033;
-    margin-left: 20px;
+/* HOVER */
+#btnAdd:hover,
+#btnLimpar:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
 }
