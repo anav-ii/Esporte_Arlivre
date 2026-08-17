@@ -10,4 +10,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class CorridaComponent {
 
+  descricaoCorrida: string = '';
+  data: string = '';
+  km: number = 0;
+
+  salvar(): void {
+    console.log('Descrição:', this.descricaoCorrida);
+    console.log('Data:', this.data);
+    console.log('Distância:', this.km);
+
+    alert('Corrida cadastrada com sucesso!');
+  }
 }

@@ -1,0 +1,57 @@
+#form {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #d96b7c;
+    border-radius: 8px;
+    background-color: #f5f4f2;
+}
+
+#form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#form-corrida {
+    display: flex;
+    flex-direction: column;
+}
+
+#form-corrida label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Inputs de texto e data */
+#form-corrida input[type="text"],
+#form-corrida input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+/* Radios */
+#form-corrida input[type="radio"] {
+    width: auto;
+    margin: 5px 5px 5px 0;
+    align-self: flex-start;
+}
+
+#btns {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#btnAdd {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    background-color: #b85c6d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
