@@ -13,22 +13,22 @@ export class AtletaServiceService {
 
      constructor(private http: HttpClient) { }
   listarAtleta(): Observable<Atleta[]> {
-      const urlApi = `https://6a835b0ecb486d243403a471.mockapi.io/atleta`
+      const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
       return this.http.get<Atleta[]>(urlApi)
   }
 
   adicionarAtleta(atleta: Atleta): Observable<Atleta> {
-      const urlApi = `https://6a835b0ecb486d243403a471.mockapi.io/atleta`
+      const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
       return this.http.post<Atleta>(urlApi, atleta)
   }
 
   removerAtleta(idAtleta: number): Observable<Atleta> {
-    const urlApi = `https://6a835b0ecb486d243403a471.mockapi.io/atleta/${idAtleta}`
+    const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${idAtleta}`
     return this.http.delete<Atleta>(urlApi)
   }
 
   alterarAtleta(atleta: Atleta): Observable<Atleta> {
-    const urlApi = `https://6a835b0ecb486d243403a471.mockapi.io/atleta/${atleta.id}`
+    const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
     return this.http.put<Atleta>(urlApi, atleta)
   }
 

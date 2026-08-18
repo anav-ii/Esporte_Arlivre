@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AtletaServiceService } from '../../service/atleta-service.service';
 import { Atleta } from '../../models/atleta';
+import { AtletaServiceService } from '../../service/atleta-service.service';
+
 
 @Component({
   selector: 'app-atleta-component',
@@ -51,7 +52,7 @@ export class AtletaComponentComponent {
     this.uf = '';
   }
 
-  salvar() {
+  enviarDadosAtleta() {
     const atleta = new Atleta();
 
     atleta.nome = this.nome;
@@ -63,8 +64,15 @@ export class AtletaComponentComponent {
     atleta.cidade = this.cidade;
     atleta.uf = this.uf;
 
-    this.atletaService.adicionarAtleta(atleta);
-
+    this.atletaService.adicionarAtleta(atleta)
+    .subscribe({
+      next: (resposta)=>{
+        console.log( resposta)
+      },
+      error:(msgErro)=>{
+        console.log( msgErro)
+      }
+    })
     this.limparDados();
 
     this.atletaService.listarAtleta();
