@@ -52,3 +52,11 @@
 .corridas button:hover {
     background-color: #9e4a5a;
 }
+
+.corridas td button {
+    margin-right: 10px;
+}
+
+.corridas td button:last-child {
+    margin-right: 0;
+}

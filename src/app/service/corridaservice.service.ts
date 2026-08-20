@@ -8,13 +8,17 @@ export class CorridaserviceService {
 
   private corridas: Corrida[] = [];
 
-  constructor() { }
-
-  adicionarCorrida(corrida: Corrida) {
+  adicionarCorrida(corrida: Corrida): void {
     this.corridas.push(corrida);
   }
 
   listarCorridas(): Corrida[] {
     return this.corridas;
+  }
+
+  excluirCorrida(id: number): void {
+    this.corridas = this.corridas.filter(
+      corrida => corrida.id !== id
+    );
   }
 }

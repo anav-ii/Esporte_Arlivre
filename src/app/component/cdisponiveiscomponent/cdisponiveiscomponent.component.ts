@@ -21,4 +21,16 @@ export class CdisponiveiscomponentComponent {
     alert('Você se inscreveu na corrida: ' + corrida.descricaoCorrida);
   }
 
+  excluir(id: number) {
+
+    const confirmar = confirm('Deseja realmente excluir esta corrida?');
+
+    if (confirmar) {
+      this.corridaService.excluirCorrida(id);
+
+      this.corridas = this.corridaService.listarCorridas();
+
+      alert('Corrida excluída com sucesso!');
+    }
+  }
 }
