@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { MenuComponentComponent } from './component/menu-component/menu-component.component';
 import { AtletaComponent } from './component/atleta-component/atleta-component.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,

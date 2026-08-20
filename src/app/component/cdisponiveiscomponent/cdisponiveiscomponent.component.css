@@ -1,0 +1,54 @@
+.corridas {
+    width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    border: 1px solid #d96b7c;
+    border-radius: 8px;
+    background-color: #f5f4f2;
+}
+
+.corridas h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.corridas table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.corridas th {
+    padding: 10px;
+    text-align: left;
+    font-size: 12px;
+    background-color: #ebe9e7;
+}
+
+.corridas td {
+    padding: 12px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.corridas a {
+    color: #b85c6d;
+    font-size: 11px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.corridas button {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 3px;
+    background-color: #b85c6d;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.corridas button:hover {
+    background-color: #9e4a5a;
+}

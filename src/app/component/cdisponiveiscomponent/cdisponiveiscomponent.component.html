@@ -1,0 +1,32 @@
+<div class="corridas">
+
+    <h3>Corridas Disponíveis</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Distâncias</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (corrida of corridas; track corrida.id) {
+                <tr>
+                    <td>{{ corrida.descricaoCorrida }}</td>
+                    <td>{{ corrida.data }}</td>
+                    <td>{{ corrida.km }}</td>
+
+                    <td>
+                        <button (click)="inscrever(corrida)">
+                            Inscrever-se
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

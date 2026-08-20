@@ -3,6 +3,7 @@ import { AtletaComponent } from './component/atleta-component/atleta-component.c
 import { HomeComponentComponent } from './component/home-component/home-component.component';
 import { CorridaComponent } from './component/corrida/corrida.component';
 import { AtletaListComponent } from './component/atleta/atleta-lista-component/atleta-lista-component.component'; 
+import { CdisponiveiscomponentComponent } from './component/cdisponiveiscomponent/cdisponiveiscomponent.component';
 
 export const routes: Routes = [
 
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {
         path:"listaAtleta",
         component: AtletaListComponent
+    },
+    {
+        path:"cdisponiveis",
+        component: CdisponiveiscomponentComponent
     }
 
 ];
