@@ -43,13 +43,13 @@ export class InscricaocomponentComponent {
     this.listarAtletas();
   }
 
-  //adicionado para lista os atletas de 'listaAtletas'
+  //adicionado para lista os atletas de listaAtletas'
   listarAtletas(): void {
     this.atletaService.listarAtletas()
       .subscribe({
         next: (dadosAtletas) => {
           this.atletas = [...dadosAtletas].sort(
-            (a, b) => a.nome.localeCompare(b.nome)
+            (a, b) => (a.nome ?? '').localeCompare(b.nome ?? '')
           );
         },
         error: (erro) => {
