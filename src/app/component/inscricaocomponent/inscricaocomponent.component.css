@@ -1,0 +1,128 @@
+#form {
+    width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    border: 1px solid #d96b7c;
+    border-radius: 8px;
+    background-color: #f5f4f2;
+}
+
+#form h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+}
+
+#form-inscricao {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cada linha do formulário */
+.linha {
+    display: flex;
+    gap: 30px;
+}
+
+/* Campos */
+.campo-atleta,
+.campo-cpf,
+.campo-corrida,
+.campo-distancia,
+.campo-camiseta,
+.campo-categoria {
+    flex: 1;
+}
+
+/* Labels */
+#form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Inputs e selects */
+#form input[type="text"],
+#form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: white;
+}
+
+/* Distâncias */
+.radios {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+}
+
+.radios input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+.radios label {
+    margin: 0 12px 0 0 !important;
+    font-weight: normal !important;
+}
+
+/* Valor */
+.valor {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.valor strong {
+    margin-right: 10px;
+}
+
+.valor span {
+    color: #b85c6d;
+    font-weight: bold;
+}
+
+/* Termos */
+.termos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.termos input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.termos label {
+    margin: 0 !important;
+    font-size: 12px;
+    font-weight: normal !important;
+}
+
+/* Botão */
+#btnFinalizar {
+    align-self: center;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    background-color: #b85c6d;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btnFinalizar:hover {
+    background-color: #9e4a5a;
+}

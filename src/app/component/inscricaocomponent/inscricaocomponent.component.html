@@ -2,17 +2,17 @@
 
     <h2>Inscrição na Corrida</h2>
 
-    <form id="form-inscricao">
+    <form id="form-inscricao" (ngSubmit)="finalizarInscricao()">
 
         <div class="linha">
 
             <div class="campo-atleta">
                 <label for="atleta">Atleta Cadastrado</label>
 
-                <select id="atleta" name="atleta">
+                <select id="atleta" name="atleta" [(ngModel)]="atleta">
                     <option value="">Selecione o atleta</option>
-                    <option value="1">João da Silva</option>
-                    <option value="2">Maria Souza</option>
+                    <option value="João da Silva">João da Silva</option>
+                    <option value="Maria Souza">Maria Souza</option>
                 </select>
             </div>
 
@@ -23,6 +23,7 @@
                     type="text"
                     id="cpf"
                     name="cpf"
+                    [(ngModel)]="cpf"
                     placeholder="000.000.000-00">
             </div>
 
@@ -32,17 +33,26 @@
         <div class="linha">
 
             <div class="campo-corrida">
+
                 <label for="corrida">Corrida Escolhida</label>
 
-                <select id="corrida" name="corrida">
-                    <option value="">Selecione a corrida</option>
-                    <option value="1">
-                        Corridas das Estações - Etapa Verão
+                <select
+                    id="corrida"
+                    name="corrida"
+                    [(ngModel)]="corridaSelecionada">
+
+                    <option [ngValue]="null">
+                        Selecione a corrida
                     </option>
-                    <option value="2">
-                        Desafio das Montanhas
-                    </option>
+
+                    @for (corrida of corridas; track corrida.id) {
+                        <option [ngValue]="corrida">
+                            {{ corrida.descricaoCorrida }} - {{ corrida.data }}
+                        </option>
+                    }
+
                 </select>
+
             </div>
 
 
@@ -51,14 +61,34 @@
                 <label>Distância da Prova</label>
 
                 <div class="radios">
-                    <input type="radio" id="5km" name="distancia" value="5km">
+
+                    <input
+                        type="radio"
+                        id="5km"
+                        name="distancia"
+                        value="5km"
+                        [(ngModel)]="distancia">
+
                     <label for="5km">5km</label>
 
-                    <input type="radio" id="10km" name="distancia" value="10km">
+                    <input
+                        type="radio"
+                        id="10km"
+                        name="distancia"
+                        value="10km"
+                        [(ngModel)]="distancia">
+
                     <label for="10km">10km</label>
 
-                    <input type="radio" id="25km" name="distancia" value="25km">
+                    <input
+                        type="radio"
+                        id="25km"
+                        name="distancia"
+                        value="25km"
+                        [(ngModel)]="distancia">
+
                     <label for="25km">25km</label>
+
                 </div>
 
             </div>
@@ -72,12 +102,17 @@
 
                 <label for="camiseta">Tamanho da Camiseta (Kit)</label>
 
-                <select id="camiseta" name="camiseta">
+                <select
+                    id="camiseta"
+                    name="camiseta"
+                    [(ngModel)]="camiseta">
+
                     <option value="">Selecione</option>
                     <option value="P">P</option>
                     <option value="M">M</option>
                     <option value="G">G</option>
                     <option value="GG">GG</option>
+
                 </select>
 
             </div>
@@ -91,8 +126,9 @@
                     type="text"
                     id="categoria"
                     name="categoria"
-                    value="Geral Masculino / 30-39 anos"
+                    [(ngModel)]="categoria"
                     readonly>
+
             </div>
 
         </div>
@@ -105,11 +141,19 @@
 
 
         <div class="termos">
-            <input type="checkbox" id="aceito">
+
+            <input
+                type="checkbox"
+                id="aceito"
+                name="aceito"
+                [(ngModel)]="aceito">
+
             <label for="aceito">
                 Li e aceito os termos do regulamento da prova e declaração de saúde.
             </label>
+
         </div>
+
 
         <button type="submit" id="btnFinalizar">
             Finalizar e Ir para Pagamento
