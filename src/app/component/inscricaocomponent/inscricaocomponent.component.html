@@ -9,11 +9,22 @@
             <div class="campo-atleta">
                 <label for="atleta">Atleta Cadastrado</label>
 
-                <select id="atleta" name="atleta" [(ngModel)]="atleta">
-                    <option value="">Selecione o atleta</option>
-                    <option value="João da Silva">João da Silva</option>
-                    <option value="Maria Souza">Maria Souza</option>
-                </select>
+                <select
+                    id="atleta"
+                    name="atleta"
+                    [(ngModel)]="atletaSelecionado">
+
+                    <option [ngValue]="null">
+                        Selecione o atleta
+                    </option>
+
+                    @for (atleta of atletas; track atleta.id) {
+                        <option [ngValue]="atleta">
+                            {{ atleta.nome }} - CPF: {{ atleta.cpf }}
+                        </option>
+                    }
+
+</select>
             </div>
 
             <div class="campo-cpf">
