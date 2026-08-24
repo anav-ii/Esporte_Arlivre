@@ -23,6 +23,7 @@ export class AtletaComponent {
   bairro = ''
   cidade = ''
   uf = ''
+  dataNascimento =''
 
   idAtleta = 0
   editar = false
@@ -34,7 +35,7 @@ export class AtletaComponent {
 
   //DECLARAÇÃO DE FUNÇÕES
   exibirDados() {
-    console.log(this.nome, this.cpf, this.sexo, this.cep, this.ruaLogradouro, this.bairro, this.cidade, this.uf)
+    console.log(this.nome, this.cpf, this.sexo, this.cep, this.ruaLogradouro, this.bairro, this.cidade, this.uf, this.dataNascimento)
 
     this.limparDados()
   }
@@ -50,6 +51,7 @@ export class AtletaComponent {
         this.bairro = dadosAtleta.bairro
         this.cidade = dadosAtleta.cidade
         this.uf = dadosAtleta.uf
+        this.dataNascimento = dadosAtleta.dataNascimento
 
         //EXECUTA A DETECÇÃO MANUALMENTE
         this.cdr.detectChanges()
@@ -68,6 +70,26 @@ export class AtletaComponent {
     }
     
   }
+  
+  idade = 0
+
+  calcularIdade(dataNascimento: string): number {
+    const nascimento = new Date(dataNascimento)
+    const hoje = new Date()
+  
+    let idade = hoje.getFullYear() - nascimento.getFullYear()
+  
+    const mes = hoje.getMonth() - nascimento.getMonth()
+  
+    if (
+      mes < 0 ||
+      (mes === 0 && hoje.getDate() < nascimento.getDate())
+    ) {
+      idade--
+    }
+  
+    return idade
+  }
 
   limparDados() {
     this.nome = ''
@@ -78,6 +100,7 @@ export class AtletaComponent {
     this.bairro = ''
     this.cidade = ''
     this.uf = ''
+    this.dataNascimento = ''
   }
 
   enviarDadosAtleta(){
@@ -90,6 +113,7 @@ export class AtletaComponent {
     atleta.bairro = this.bairro
     atleta.cidade = this.cidade
     atleta.uf = this.uf
+    atleta.dataNascimento = this.dataNascimento
 
     if(this.editar){
       atleta.id = this.idAtleta
