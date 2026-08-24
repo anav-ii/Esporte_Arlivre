@@ -74,22 +74,22 @@ export class AtletaComponent {
   idade = 0
 
   calcularIdade(dataNascimento: string): number {
-    const nascimento = new Date(dataNascimento)
-    const hoje = new Date()
-  
-    let idade = hoje.getFullYear() - nascimento.getFullYear()
-  
-    const mes = hoje.getMonth() - nascimento.getMonth()
-  
-    if (
-      mes < 0 ||
-      (mes === 0 && hoje.getDate() < nascimento.getDate())
-    ) {
-      idade--
-    }
-  
-    return idade
+  const nascimento = new Date(dataNascimento)
+  const hoje = new Date()
+
+  let idade = hoje.getFullYear() - nascimento.getFullYear()
+
+  const mes = hoje.getMonth() - nascimento.getMonth()
+
+  if (
+    mes < 0 ||
+    (mes === 0 && hoje.getDate() < nascimento.getDate())
+  ) {
+    idade--
   }
+
+  return idade
+}
 
   limparDados() {
     this.nome = ''

@@ -61,6 +61,7 @@ export class AtletaListComponent {
     this.router.navigate(['/cadastroAtleta', atleta.id])
 
   }
+ 
 
   calcularIdade(dataNascimento: string): number {
     const nascimento = new Date(dataNascimento)
