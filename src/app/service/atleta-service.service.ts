@@ -11,27 +11,27 @@ export class AtletaServiceService {
     constructor(private http: HttpClient) { }
 
     listarAtletas(): Observable<Atleta[]> {
-        const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
+        const urlApi = `http://127.0.0.1:8000/pessoa/`
         return this.http.get<Atleta[]>(urlApi)
     }
 
     listarAtleta(idAtleta: number): Observable<Atleta> {
-        const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${idAtleta}`
+        const urlApi = `http://127.0.0.1:8000/pessoa/${idAtleta}`
         return this.http.get<Atleta>(urlApi)
     }
 
     salvarAtleta(atleta: Atleta): Observable<Atleta> {
-        const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta`
+        const urlApi = `http://127.0.0.1:8000/pessoa/`
         return this.http.post<Atleta>(urlApi, atleta)
     }
 
     excluirAtleta(idAtleta: number): Observable<Atleta> {
-        const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${idAtleta}`
+        const urlApi = `http://127.0.0.1:8000/pessoa/${idAtleta}`
         return this.http.delete<Atleta>(urlApi)
     }
 
     alterarAtleta(atleta: Atleta): Observable<Atleta> {
-        const urlApi = `https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/${atleta.id}`
+        const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
 
         return this.http.put<Atleta>(urlApi, atleta)
     }
