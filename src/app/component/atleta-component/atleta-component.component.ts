@@ -23,7 +23,9 @@ export class AtletaComponent {
   bairro = ''
   cidade = ''
   uf = ''
-  dataNascimento =''
+  datanascimento =''
+  peso: number = 0.0
+  altura: number = 0.0
 
   idAtleta = 0
   editar = false
@@ -35,7 +37,7 @@ export class AtletaComponent {
 
   //DECLARAÇÃO DE FUNÇÕES
   exibirDados() {
-    console.log(this.nome, this.cpf, this.sexo, this.cep, this.ruaLogradouro, this.bairro, this.cidade, this.uf, this.dataNascimento)
+    console.log(this.nome, this.cpf, this.sexo, this.cep, this.ruaLogradouro, this.bairro, this.cidade, this.uf, this.datanascimento,  this.peso, this.altura)
 
     this.limparDados()
   }
@@ -44,14 +46,16 @@ export class AtletaComponent {
     .subscribe({
       next:(dadosAtleta)=>{
         this.nome = dadosAtleta.nome
-        this.cpf = dadosAtleta.cpf
+        //this.cpf = dadosAtleta.cpf
         this.sexo = dadosAtleta.sexo
-        this.cep = dadosAtleta.cep
-        this.ruaLogradouro = dadosAtleta.ruaLogradouro
-        this.bairro = dadosAtleta.bairro
-        this.cidade = dadosAtleta.cidade
-        this.uf = dadosAtleta.uf
-        this.dataNascimento = dadosAtleta.dataNascimento
+        //this.cep = dadosAtleta.cep
+        //this.ruaLogradouro = dadosAtleta.ruaLogradouro
+        //this.bairro = dadosAtleta.bairro
+        //this.cidade = dadosAtleta.cidade
+        //this.uf = dadosAtleta.uf
+        this.datanascimento = dadosAtleta.datanascimento
+        this.peso = dadosAtleta.peso
+        this.altura = dadosAtleta.altura
 
         //EXECUTA A DETECÇÃO MANUALMENTE
         this.cdr.detectChanges()
@@ -73,8 +77,8 @@ export class AtletaComponent {
   
   idade = 0
 
-  calcularIdade(dataNascimento: string): number {
-  const nascimento = new Date(dataNascimento)
+  calcularIdade(datanascimento: string): number {
+  const nascimento = new Date(datanascimento)
   const hoje = new Date()
 
   let idade = hoje.getFullYear() - nascimento.getFullYear()
@@ -93,30 +97,35 @@ export class AtletaComponent {
 
   limparDados() {
     this.nome = ''
-    this.cpf = 0
+    //this.cpf = 0
     this.sexo = ''
-    this.cep = 0
-    this.ruaLogradouro = ''
-    this.bairro = ''
-    this.cidade = ''
-    this.uf = ''
-    this.dataNascimento = ''
+    //this.cep = 0
+    //this.ruaLogradouro = ''
+    //this.bairro = ''
+    //this.cidade = ''
+    //this.uf = ''
+    this.datanascimento = ''
+    this.peso
+    this.altura
   }
 
   enviarDadosAtleta(){
     const atleta = new Atleta()
     atleta.nome = this.nome
-    atleta.cpf = this.cpf
+   // atleta.cpf = this.cpf
     atleta.sexo = this.sexo
-    atleta.cep = this.cep
-    atleta.ruaLogradouro = this.ruaLogradouro
-    atleta.bairro = this.bairro
-    atleta.cidade = this.cidade
-    atleta.uf = this.uf
-    atleta.dataNascimento = this.dataNascimento
+    //atleta.cep = this.cep
+    //atleta.ruaLogradouro = this.ruaLogradouro
+    //atleta.bairro = this.bairro
+    //atleta.cidade = this.cidade
+    //atleta.uf = this.uf
+    atleta.datanascimento = this.datanascimento
+    atleta.peso = this.peso
+    atleta.altura = this.altura
+
 
     if(this.editar){
-      atleta.id = this.idAtleta
+      atleta.idpessoa = this.idAtleta
 
       this.atletaService.alterarAtleta(atleta)
       .subscribe({
