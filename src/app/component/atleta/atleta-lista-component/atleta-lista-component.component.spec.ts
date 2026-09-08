@@ -1,27 +1,35 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { AtletaListComponent } from './atleta-lista-component.component';
+import {
+  provideHttpClientTesting,
+  HttpTestingController
+} from '@angular/common/http/testing';
+
+import { AtletaListaComponent } from './atleta-lista-component.component';
 import { AtletaServiceService } from '../../../service/atleta-service.service';
-import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
-import { AtletaComponent } from '../../atleta-component/atleta-component.component';
 import { Atleta } from '../../../models/atleta';
 
-describe('AtletaListaComponent, AtletaComponent',() =>{
 
-  let comp_atleta: AtletaListComponent; 
+describe('AtletaListaComponent', () => {
+
+  let comp_atleta: AtletaListaComponent;
   let httpMock: HttpTestingController;
-  let service: AtletaServiceService
+  let service: AtletaServiceService;
+
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-      AtletaListComponent,
-      provideHttpClient(),
-      provideHttpClientTesting()
-      ]
-    })
 
-    comp_atleta = TestBed.inject(AtletaListComponent);
+    TestBed.configureTestingModule({
+
+      providers: [
+        AtletaListaComponent,
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+
+    });
+
+    comp_atleta = TestBed.inject(AtletaListaComponent);
 
     service = TestBed.inject(AtletaServiceService);
 
@@ -29,91 +37,99 @@ describe('AtletaListaComponent, AtletaComponent',() =>{
 
   });
 
+
+  // TESTE DA IDADE
   it('deve calcular a idade corretamente', () => {
-    const resultado = comp_atleta.calcularIdade('1976-05-05');
+
+    const resultado =
+      comp_atleta.calcularIdade('1976-05-05');
 
     expect(resultado).toBe(50);
-  })
 
+  });
+
+
+  // GET
   it('Deve retornar pessoas', () => {
 
-    const atletasMock: Atleta[]= [
-        {
-          "nome": "João",
-          "cpf": 12345678910,
-          "sexo": "M",
-          "bairro": "Centro",
-          "cidade": "Aracaju",
-          "uf": "Se",
-          "dataNascimento": "2000-02-25",
-          "id": 1,
-          "cep": 49123123,
-          "ruaLogradouro": "Rua Sei lá das quantas"
-          
-        },
-        {
-          "nome": "Maria",
-          "cpf": 11122233302,
-          "sexo": "F",
-          "cep": 49123123,
-          "bairro": "Centro",
-          "cidade": "Aracaju",
-          "uf": "Se",
-          "dataNascimento": "2010-02-20",
-          "id": 2,
-          "ruaLogradouro": "Rua Sei lá das quantas",
-         
-        }
-      ]
+    const atletasMock: Atleta[] = [
 
-      service.listarAtletas().subscribe(atletas=>{
-        expect(atletasMock.length).toBe(2)
-        expect(atletasMock[0].nome).toBe('João')
-        expect(atletasMock[1].nome).toBe('Maria')
-      })
+      {
+        idpessoa: 1,
+        nome: 'João',
+        sexo: 'M',
+        datanascimento: '2000-02-25',
+        peso: 70,
+        altura: 1.75
+      },
 
-      const request = httpMock.expectOne(
-        'https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta'
-      )
-
-      expect(request.request.method).toBe('GET')
-
-      request.flush(atletasMock)
-      
-  })
-
-   // POST
-   it('deve adicionar uma pessoa', () => {
-
-    const atleta: Atleta =   {
-        "nome": "Maria Flor",
-        "cpf": 12345678910,
-        "sexo": "M",
-        "cep": 49123123,
-        "bairro": "Centro",
-        "cidade": "Aracaju",
-        "uf": "Se",
-        "dataNascimento": "2000-02-25",
-        "id": 3,
-        "ruaLogradouro": "Rua Sei lá das quantas"
+      {
+        idpessoa: 2,
+        nome: 'Maria',
+        sexo: 'F',
+        datanascimento: '2010-02-20',
+        peso: 55,
+        altura: 1.65
       }
 
+    ];
 
-    service.salvarAtleta(atleta).subscribe(atletas => {
 
-      expect(atletas).toEqual(atletas);
+    service.listarAtletas().subscribe(atletas => {
+
+      expect(atletas.length).toBe(2);
+
+      expect(atletas[0].nome).toBe('João');
+
+      expect(atletas[1].nome).toBe('Maria');
 
     });
 
 
     const request = httpMock.expectOne(
-      'https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta'
+      'http://127.0.0.1:8000/pessoa/'
+    );
+
+
+    expect(request.request.method).toBe('GET');
+
+
+    request.flush(atletasMock);
+
+  });
+
+
+  // POST
+  it('deve adicionar uma pessoa', () => {
+
+    const atleta: Atleta = {
+
+      idpessoa: 3,
+      nome: 'Maria Flor',
+      sexo: 'F',
+      datanascimento: '2000-02-25',
+      peso: 60,
+      altura: 1.70
+
+    };
+
+
+    service.salvarAtleta(atleta).subscribe(resposta => {
+
+      expect(resposta).toEqual(atleta);
+
+    });
+
+
+    const request = httpMock.expectOne(
+      'http://127.0.0.1:8000/pessoa/'
     );
 
 
     expect(request.request.method).toBe('POST');
 
     expect(request.request.body).toEqual(atleta);
+
 
     request.flush(atleta);
 
@@ -123,29 +139,27 @@ describe('AtletaListaComponent, AtletaComponent',() =>{
   // PUT
   it('deve editar um atleta', () => {
 
-   const atleta: Atleta =   {
-        "nome": "João Souza",
-        "cpf": 12345678910,
-        "sexo": "M",
-        "cep": 49123123,
-        "bairro": "Centro",
-        "cidade": "Aracaju",
-        "uf": "Se",
-        "dataNascimento": "2000-02-25",
-        "id": 1,
-        "ruaLogradouro": "Rua Sei lá das quantas"
-   }
+    const atleta: Atleta = {
+
+      idpessoa: 1,
+      nome: 'João Souza',
+      sexo: 'M',
+      datanascimento: '2000-02-25',
+      peso: 75,
+      altura: 1.80
+
+    };
 
 
-    service.alterarAtleta(atleta).subscribe(atletas => {
+    service.alterarAtleta(atleta).subscribe(resposta => {
 
-      expect(atletas).toEqual(atleta);
+      expect(resposta).toEqual(atleta);
 
     });
 
 
     const request = httpMock.expectOne(
-      'https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/1'
+      'http://127.0.0.1:8000/pessoa/'
     );
 
 
@@ -162,11 +176,15 @@ describe('AtletaListaComponent, AtletaComponent',() =>{
   // DELETE
   it('deve excluir um atleta', () => {
 
-    service.excluirAtleta(1).subscribe();
+    service.excluirAtleta(1).subscribe(() => {
+
+      expect(true).toBeTrue();
+
+    });
 
 
     const request = httpMock.expectOne(
-      'https://6a7f6d923183f5fd884b1a61.mockapi.io/esportearlivre/atleta/1'
+      'http://127.0.0.1:8000/pessoa/'
     );
 
 
@@ -178,6 +196,3 @@ describe('AtletaListaComponent, AtletaComponent',() =>{
   });
 
 });
-
-
-

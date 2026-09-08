@@ -1,19 +1,31 @@
-<section id="section-lista-Atleta">
-    <h2>Lista Atletas</h2>
+<div class="lista-atletas">
 
-    @for(elem of listaAtletas(); track elem.id) {
-        <div class="atleta-item">
-            <span class="span-dados-atleta">
-                {{elem.id}} - {{ elem.nome }} - {{ calcularIdade (elem.dataNascimento) }} anos - {{ elem.cpf }} - {{elem.cidade }} / {{ elem.uf }}
-            </span>
-            <span class="span-lnk-atletas">
-                <a class="lnk-atleta lnk-alterar" (click)="carregaDadosAtletaForm(elem)">A</a>
-                <a class="lnk-atleta lnk-excluir" (click)="excluir(elem.id)">E</a>
-            </span>
-        </div>
-    }@empty{
-        <div class="div-item-pessoa">
-            NENHUM REGISTRO NA LISTA
-        </div> 
-    }
-</section>
+  @for (elem of listaAtletas(); track elem.idpessoa) {
+
+    <div class="atleta">
+
+      {{ elem.idpessoa }} -
+      {{ elem.nome }} -
+      {{ calcularIdade(elem.datanascimento) }} anos -
+      Peso: {{ elem.peso }} kg -
+      Altura: {{ elem.altura }} m -
+      IMC: {{ calcularImc(elem.peso, elem.altura).toFixed(1) }} -
+      {{ classificarImc(calcularImc(elem.peso, elem.altura)) }}
+
+      <a
+        class="lnk-atleta"
+        (click)="carregaDadosAtletaForm(elem)">
+        A
+      </a>
+
+      <a
+        class="lnk-atleta lnk-excluir"
+        (click)="excluir(elem.idpessoa)">
+        E
+      </a>
+
+    </div>
+
+  }
+
+</div>

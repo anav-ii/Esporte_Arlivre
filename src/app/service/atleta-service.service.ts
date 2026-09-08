@@ -21,6 +21,8 @@ export class AtletaServiceService {
     }
 
     salvarAtleta(atleta: Atleta): Observable<Atleta> {
+        console.log(atleta)
+        
         const urlApi = `http://127.0.0.1:8000/pessoa/`
         return this.http.post<Atleta>(urlApi, atleta)
     }
@@ -31,7 +33,7 @@ export class AtletaServiceService {
     }
 
     alterarAtleta(atleta: Atleta): Observable<Atleta> {
-        const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.id}`
+        const urlApi = `http://127.0.0.1:8000/pessoa/${atleta.idpessoa}`
 
         return this.http.put<Atleta>(urlApi, atleta)
     }

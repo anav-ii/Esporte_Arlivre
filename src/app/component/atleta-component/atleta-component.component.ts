@@ -1,10 +1,9 @@
-import { Component, ChangeDetectorRef} from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { AtletaServiceService } from '../../service/atleta-service.service';
 import { Atleta } from '../../models/atleta';
+import { AtletaServiceService } from '../../service/atleta-service.service';
 import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'app-atleta-component',
@@ -14,144 +13,136 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './atleta-component.component.css',
 })
 export class AtletaComponent {
-  //DECLARANDO ATIBUTOS
-  nome = ''
-  cpf = 0
-  sexo = ''
-  cep = 0
-  ruaLogradouro = ''
-  bairro = ''
-  cidade = ''
-  uf = ''
-  datanascimento =''
-  peso: number = 0.0
-  altura: number = 0.0
 
-  idAtleta = 0
-  editar = false
+  nome = '';
+  sexo = '';
+  datanascimento: string = '';
+  peso = 0;
+  altura = 0;
 
-  //DECLARAÇÃO DO CONSTRUTOR
-  constructor(private atletaService: AtletaServiceService,
-    private http: ActivatedRoute,
-    private cdr: ChangeDetectorRef) { }
+  idAtleta = 0;
+  editar = false;
 
-  //DECLARAÇÃO DE FUNÇÕES
-  exibirDados() {
-    console.log(this.nome, this.cpf, this.sexo, this.cep, this.ruaLogradouro, this.bairro, this.cidade, this.uf, this.datanascimento,  this.peso, this.altura)
+  constructor(
+    private atletaService: AtletaServiceService,
+    private rota: ActivatedRoute,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-    this.limparDados()
-  }
-  carregaDados(idAtleta: number){
-    this.atletaService.listarAtleta(idAtleta)
-    .subscribe({
-      next:(dadosAtleta)=>{
-        this.nome = dadosAtleta.nome
-        //this.cpf = dadosAtleta.cpf
-        this.sexo = dadosAtleta.sexo
-        //this.cep = dadosAtleta.cep
-        //this.ruaLogradouro = dadosAtleta.ruaLogradouro
-        //this.bairro = dadosAtleta.bairro
-        //this.cidade = dadosAtleta.cidade
-        //this.uf = dadosAtleta.uf
-        this.datanascimento = dadosAtleta.datanascimento
-        this.peso = dadosAtleta.peso
-        this.altura = dadosAtleta.altura
+  ngOnInit() {
 
-        //EXECUTA A DETECÇÃO MANUALMENTE
-        this.cdr.detectChanges()
-      },
-      error:(msgErro)=>{
-        console.log('ERRO AO LISTAR ATLETA', msgErro)
-      }
-    })
-  }
-  ngOnInit(){
-    this.idAtleta = Number(this.http.snapshot.paramMap.get('id'))
+    this.idAtleta = Number(
+      this.rota.snapshot.paramMap.get('id')
+    );
 
-    if(this.idAtleta > 0){
-      this.editar = true
-      this.carregaDados(this.idAtleta)
+    if (this.idAtleta > 0) {
+      this.editar = true;
+      this.carregaDados(this.idAtleta);
     }
-    
   }
-  
-  idade = 0
-
-  calcularIdade(datanascimento: string): number {
-  const nascimento = new Date(datanascimento)
-  const hoje = new Date()
-
-  let idade = hoje.getFullYear() - nascimento.getFullYear()
-
-  const mes = hoje.getMonth() - nascimento.getMonth()
-
-  if (
-    mes < 0 ||
-    (mes === 0 && hoje.getDate() < nascimento.getDate())
-  ) {
-    idade--
-  }
-
-  return idade
-}
 
   limparDados() {
-    this.nome = ''
-    //this.cpf = 0
-    this.sexo = ''
-    //this.cep = 0
-    //this.ruaLogradouro = ''
-    //this.bairro = ''
-    //this.cidade = ''
-    //this.uf = ''
-    this.datanascimento = ''
-    this.peso
-    this.altura
+
+    this.nome = '';
+    this.sexo = '';
+    this.datanascimento = '';
+    this.peso = 0;
+    this.altura = 0;
   }
 
-  enviarDadosAtleta(){
-    const atleta = new Atleta()
-    atleta.nome = this.nome
-   // atleta.cpf = this.cpf
-    atleta.sexo = this.sexo
-    //atleta.cep = this.cep
-    //atleta.ruaLogradouro = this.ruaLogradouro
-    //atleta.bairro = this.bairro
-    //atleta.cidade = this.cidade
-    //atleta.uf = this.uf
-    atleta.datanascimento = this.datanascimento
-    atleta.peso = this.peso
-    atleta.altura = this.altura
+  carregaDados(idAtleta: number) {
 
+    this.atletaService.listarAtleta(idAtleta)
+      .subscribe({
 
-    if(this.editar){
-      atleta.idpessoa = this.idAtleta
+        next: (dadosAtleta) => {
+
+          this.nome = dadosAtleta.nome;
+          this.sexo = dadosAtleta.sexo;
+          this.datanascimento = dadosAtleta.datanascimento;
+          this.peso = dadosAtleta.peso;
+          this.altura = dadosAtleta.altura;
+
+          this.cdr.detectChanges();
+        },
+
+        error: (msgErro) => {
+
+          console.log(
+            'ERRO AO LISTAR ATLETA',
+            msgErro
+          );
+        }
+      });
+  }
+
+  enviarDadosAtleta() {
+
+    const atleta = new Atleta();
+
+    atleta.nome = this.nome;
+    atleta.sexo = this.sexo;
+    atleta.datanascimento = this.datanascimento;
+    atleta.peso = this.peso;
+    atleta.altura = this.altura;
+
+    // EDITAR ATLETA
+    if (this.editar) {
+
+      atleta.idpessoa = this.idAtleta;
 
       this.atletaService.alterarAtleta(atleta)
-      .subscribe({
-        next: (resposta) => {
-          console.log(resposta)
-        },
-        error: (msgErro) => {
-          console.log(msgErro)
-        } 
-      })
-    }else{
+        .subscribe({
+
+          next: (resposta) => {
+
+            console.log(
+              'Atleta alterado com sucesso!',
+              resposta
+            );
+
+            alert('Atleta alterado com sucesso!');
+
+            this.limparDados();
+          },
+
+          error: (msgErro) => {
+
+            console.log(
+              'Erro ao alterar atleta:',
+              msgErro
+            );
+          }
+        });
+
+    } 
+    
+    // CADASTRAR NOVO ATLETA
+    else {
+
       this.atletaService.salvarAtleta(atleta)
-      .subscribe({
-        next:(resposta)=>{
-          console.log( resposta)
-        },
-        error:(msgErro)=>{
-          console.log( msgErro)
-        }
-      })
+        .subscribe({
+
+          next: (resposta) => {
+
+            console.log(
+              'Atleta cadastrado com sucesso!',
+              resposta
+            );
+
+            alert('Atleta cadastrado com sucesso!');
+
+            this.limparDados();
+          },
+
+          error: (msgErro) => {
+
+            console.log(
+              'Erro ao cadastrar atleta:',
+              msgErro
+            );
+          }
+        });
     }
-    
-    
-    this.limparDados()   
-
-    this.atletaService.listarAtletas()
-    
-
-} }
+  }
+}
